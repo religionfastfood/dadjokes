@@ -74,6 +74,8 @@ export default class App extends React.Component<AppProps, AppState> {
   render() {
     const { title, isOfficeInitialized } = this.props;
 
+    const iconToggle = this.state.showAbout ? "ChevronLeft" : "Help";
+
     if (!isOfficeInitialized) {
       return (
         <Progress title={title} logo="assets/logo-filled.png" message="Please sideload your addin to see app body." />
@@ -84,7 +86,7 @@ export default class App extends React.Component<AppProps, AppState> {
       <div className="ms-welcome">
         <Header logo="assets/dad-clipart.png" title={this.props.title} message="DAD JOKES" />
         {this.state.hasJoke ? (
-          <h3 className="ms-fontSize-16">{this.state.joke}</h3>
+          <h3 className="ms-fontSize-24">&quot;{this.state.joke}&quot;</h3>
         ) : (
           <HeroList
             message="Share cringey, eye-rolling jokes with your coworkers!"
@@ -110,8 +112,8 @@ export default class App extends React.Component<AppProps, AppState> {
             Send to Contacts
           </Button>
         ) : null}
-        <Button className="ms-welcome__action" buttonType={ButtonType.hero} iconProps={{ iconName: "Help" }} onClick={this.aboutThisAddInHandler}>
-          About This Add-in
+        <Button className="ms-welcome__action" buttonType={ButtonType.hero} iconProps={{ iconName: iconToggle }} onClick={this.aboutThisAddInHandler}>
+          {this.state.showAbout ? "Back" : "About This Add-in"}
         </Button>
       </div>
     );
